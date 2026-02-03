@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: cloud-payment-service
+  cloud:
+    # ----------------------- 注册中心 ----------------------------------------------
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        #配置当前服务注册到里面使用的名字
+        service-name: ${spring.application.name}
+    # ------------------------------------------------------------------------------
+      config:
+        enabled: true # 是否启用 consul 作为配置中心
+        format: yaml # 指定 consul 中存储的 配置格式
+        profile-separator: "-" # 用于拼接 spring.profiles.active 的分隔符
+        data-key: data # 指定 consul KV 存储中的 key
+        prefixes: config # 指定 consul 配置的前缀
